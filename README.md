@@ -41,14 +41,13 @@ In your ionic app:
 
 *sessionToken* should be unique for each call. Check /sessions endpoint in th[e Veriff API documentation](https://developers.veriff.com/#sessions) to learn how to generate one.
 
-    ```javascript
     let sessionToken = "your Veriff session token"
     this.platform.ready().then(() => {
       VERIFF.start(sessionToken).then(code => {
         // The promise returns the verification result of Veriff SDK
       });
     });
-    ```
+    
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
