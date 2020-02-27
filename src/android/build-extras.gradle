@@ -1,0 +1,22 @@
+buildscript {
+    repositories {
+        maven { url "https://cdn.veriff.me/android/" }
+        google()
+        jcenter()
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://cdn.veriff.me/android/" }
+        google()
+        jcenter()
+    }
+}
+
+dependencies {
+    implementation 'com.veriff:veriff-library:2.9.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'com.google.android.material:material:1.0.0'
+
+}

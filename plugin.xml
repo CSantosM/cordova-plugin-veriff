@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<plugin id="cordova-plugin-veriff" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <name>cordova-plugin-veriff</name>
+    <description>Cordova plugin exposing Veriff SDK</description>
+    <keywords>cordova,phonegap,ecosystem:cordova,cordova-android,cordova-ios,android,ios,ionic,veriff</keywords>
+
+    <js-module name="veriff" src="dist/veriff.js">
+        <clobbers target="VERIFF" />
+    </js-module>
+
+    <platform name="android">
+
+        <!-- Android X support -->
+        <dependency id="cordova-plugin-androidx" />
+        <dependency id="cordova-plugin-androidx-adapter" />
+
+        <!-- config-file -->
+        <config-file parent="/*" target="res/xml/config.xml">
+            <feature name="VeriffCordovaPlugin">
+                <param name="android-package" value="org.apache.cordova.csantosm.VeriffCordovaPlugin" />
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+            <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+        <config-file parent="/*" target="AndroidManifest.xml" />
+
+        <!-- source-file -->
+        <source-file src="src/android/VeriffCordovaPlugin.java" target-dir="src/com/csantosm/veriff/cordova/" />
+
+        <!-- framework h -->
+        <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
+    </platform>
+
+</plugin>
