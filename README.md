@@ -8,7 +8,7 @@ Cordova plugin exposing the [Veriff SDK](https://www.veriff.com/) - Smart and sc
 
 ## Requeriments
 - Android 5.0 or newer
--  iOS version 11.0
+-  iOS version 11.0 or newer
 ## Installation
 
 Within your Cordova project:
