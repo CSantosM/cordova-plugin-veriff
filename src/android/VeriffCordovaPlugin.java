@@ -18,13 +18,18 @@ import mobi.lab.veriff.data.VeriffConstants;
 
 public class VeriffCordovaPlugin  extends CordovaPlugin {
 
+    // Actions
+    private static final String LAUNCH_ACTION = "launchVeriffSDK";
+
+
     private static final int REQUEST_CODE = 800;
+    private static final String SESSION_URL = "https://magic.veriff.me";
     private static CallbackContext callbackContextApp;
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
         this.callbackContextApp = callbackContext;
-        if(action.equals("launchVeriffSDK")){
+        if(action.equals(LAUNCH_ACTION)){
             if(args.isNull(0)){
                 this.callbackContextApp.error("Error: Session token is required");
                 return false;
@@ -40,7 +45,7 @@ public class VeriffCordovaPlugin  extends CordovaPlugin {
 
     private void launchVeriffSDK(String sessionToken){
         cordova.setActivityResultCallback(this);
-        Veriff.Builder veriffSDK = new Veriff.Builder("https://magic.veriff.me", sessionToken);
+        Veriff.Builder veriffSDK = new Veriff.Builder(SESSION_URL, sessionToken);
         veriffSDK.launch(cordova.getActivity(),REQUEST_CODE);
     }
 
