@@ -21,7 +21,6 @@ public class VeriffCordovaPlugin  extends CordovaPlugin {
     // Actions
     private static final String LAUNCH_ACTION = "launchVeriffSDK";
 
-
     private static final int REQUEST_CODE = 800;
     private static final String SESSION_URL = "https://magic.veriff.me";
     private static CallbackContext callbackContextApp;
