@@ -40,4 +40,32 @@
         <framework src="src/android/build-extras.gradle" custom="true" type="gradleReference" />
     </platform>
 
+    <platform name="ios">
+        <!-- config-file -->
+        <config-file parent="/*" target="config.xml">
+            <feature name="VeriffCordovaPlugin">
+                <param name="ios-package" value="VeriffCordovaPlugin" />
+            </feature>
+        </config-file>
+
+        <!-- source-file -->
+        <source-file src="src/ios/VeriffCordovaPlugin.swift" />
+
+        <podspec>
+            <config>
+                <source url="https://github.com/CocoaPods/Specs.git" />
+            </config>
+            <pods use-frameworks="true">
+                <pod name="VeriffSDK" swift-version="2.7.4" />
+            </pods>
+        </podspec>
+
+        <config-file parent="NSCameraUsageDescription" target="*-Info.plist">
+            <string>App needs access to your camera</string>
+        </config-file>
+        <config-file parent="NSMicrophoneUsageDescription" target="*-Info.plist">
+            <string>App needs access to your microphone</string>
+        </config-file>
+    </platform>
+
 </plugin>
