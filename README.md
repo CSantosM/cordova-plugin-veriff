@@ -13,7 +13,7 @@ Cordova plugin exposing the [Veriff SDK](https://www.veriff.com/) - Smart and sc
 
 Within your Cordova project:
 
-`$ cordova plugin add https://github.com/CSantosM/cordova-plugin-veriff`
+`$ cordova plugin add cordova-plugin-veriff`
 
 
 ## Building
@@ -47,7 +47,7 @@ In your ionic app:
         // The promise returns the verification result of Veriff SDK
       });
     });
-    
+
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md)
