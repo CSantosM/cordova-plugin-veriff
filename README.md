@@ -1,10 +1,10 @@
-# cordova-plugin-veriff
+
+# cordova-plugin-veriff  
+
+[![npm version](https://img.shields.io/npm/v/cordova-plugin-veriff)](https://www.npmjs.com/package/cordova-plugin-veriff)
+
 
 Cordova plugin exposing the [Veriff SDK](https://www.veriff.com/) - Smart and scalable identity verification
-
-
-- [Bug Tracker](https://github.com/CSantosM/cordova-plugin-veriff/issues)
-
 
 ## Requeriments
 - Android 5.0 or newer
@@ -15,12 +15,6 @@ Within your Cordova project:
 
 `$ cordova plugin add cordova-plugin-veriff`
 
-
-## Building
-
-Within root plugin path:
-
-`$ npm run build`
 
 ## Usage
 
@@ -51,6 +45,16 @@ this.platform.ready().then(() => {
   });
 });
 ```
+
+## Building
+
+Within root plugin path:
+
+`$ npm run build`
+
+## Bugs
+
+- [Bug Tracker](https://github.com/CSantosM/cordova-plugin-veriff/issues)
 
 ## Changelog
 
