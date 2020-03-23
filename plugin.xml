@@ -41,6 +41,9 @@
     </platform>
 
     <platform name="ios">
+
+        <hook type="after_prepare" src="hooks/veriff-swift-support.js" />
+
         <!-- config-file -->
         <config-file parent="/*" target="config.xml">
             <feature name="VeriffCordovaPlugin">
