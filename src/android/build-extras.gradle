@@ -15,7 +15,7 @@ allprojects {
 }
 
 dependencies {
-    implementation 'com.veriff:veriff-library:2.9.0'
+    implementation 'com.veriff:veriff-library:2.10.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.0.0'
 
