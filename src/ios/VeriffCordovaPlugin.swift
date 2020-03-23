@@ -10,7 +10,7 @@ import Veriff
 		callbackId = command.callbackId! as String
 		let sessionToken = command.arguments[0] as! String
 		
-		let conf = VeriffConfiguration(sessionToken: sessionToken , sessionUrl: "https://magic.veriff.me")
+		let conf = VeriffConfiguration(sessionToken: sessionToken , sessionUrl: "https://alchemy.veriff.com")
 		let veriff = Veriff.shared
 		veriff.delegate = self
 		veriff.set(configuration: conf!)
