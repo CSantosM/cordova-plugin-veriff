@@ -1,5 +1,5 @@
 
-# cordova-plugin-veriff  
+# cordova-plugin-veriff
 
 [![npm version](https://img.shields.io/npm/v/cordova-plugin-veriff)](https://www.npmjs.com/package/cordova-plugin-veriff)
 
@@ -13,7 +13,9 @@ Cordova plugin exposing the [Veriff SDK](https://www.veriff.com/) - Smart and sc
 
 Within your Cordova project:
 
-`$ cordova plugin add cordova-plugin-veriff`
+```bash
+$ cordova plugin add cordova-plugin-veriff
+```
 
 
 ## Usage
@@ -41,7 +43,7 @@ declare var VERIFF;
 let sessionToken = "your Veriff session token"
 this.platform.ready().then(() => {
   VERIFF.start(sessionToken).then(code => {
-    // The promise returns the VeriffSDK verification result 
+    // The promise returns the VeriffSDK verification result
   });
 });
 ```
