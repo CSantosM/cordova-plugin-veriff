@@ -52,6 +52,9 @@ this.platform.ready().then(() => {
 
 Within root plugin path:
 
+```bash
+$ npm run build
+```
 `$ npm run build`
 
 ## Bugs
