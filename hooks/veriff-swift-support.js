@@ -1,60 +1,20 @@
 #!/usr/bin/env node
 
-"use strict";
+/* eslint-disable import/no-unresolved */
+/* eslint-disable global-require */
 
-var fs = require("fs"),
-	path = require("path"),
-	xcode = require("xcode"),
-	xmlEntities = new (require("html-entities").XmlEntities)(),
-	SWIFT_VERSION = "4.2",
-	SWIFT_VERSION_XCODE = '"' + SWIFT_VERSION + '"';
+const fs = require('fs');
+const path = require('path');
+const xcode = require('xcode');
+const xmlEntities = new (require('html-entities').XmlEntities)();
 
-module.exports = function(context) {
-
-	var projectRoot = context.opts.projectRoot,
-		projectName = getProjectName(projectRoot),
-		platformPath = path.join(projectRoot, "platforms", "ios"),
-		xcodeProjectName = projectName + ".xcodeproj",
-		xcodeProjectConfigPath = path.join(
-			platformPath,
-			xcodeProjectName,
-			"project.pbxproj"
-		),
-        xcodeProject;
-        
-    xcodeProject = xcode.project(xcodeProjectConfigPath);
-
-    xcodeProject.parse(function (error) {
-
-        var buildSettingsChanged = false;
-        var configurations = nonComments(xcodeProject.pbxXCBuildConfigurationSection());
-
-        Object.keys(configurations).forEach(function (config) {
-
-            var buildSettings = configurations[config].buildSettings;
-        
-            if (!matchBuildSettingsValue(buildSettings.SWIFT_VERSION, SWIFT_VERSION_XCODE)) {
-                buildSettings.SWIFT_VERSION = SWIFT_VERSION_XCODE;
-                buildSettingsChanged = true;
-            }
-        });
-
-        if (buildSettingsChanged) {
-            fs.writeFileSync(xcodeProjectConfigPath, xcodeProject.writeSync(), 'utf-8');
-            debug('file correctly fixed: ' + getRelativeToProjectRootPath(xcodeProjectConfigPath, projectRoot));	
-        } else {
-            debug('file is correct: ' + getRelativeToProjectRootPath(xcodeProjectConfigPath, projectRoot));	
-        }
-    });
-
-};
+const SWIFT_VERSION = '4.2';
+const SWIFT_VERSION_XCODE = `"${SWIFT_VERSION}"`;
 
 function getProjectName(protoPath) {
-	var
-		cordovaConfigPath = path.join(protoPath, 'config.xml'),
-		content = fs.readFileSync(cordovaConfigPath, 'utf-8');
-
-	var name = /<name>([\s\S]*)<\/name>/mi.exec(content)[1].trim();
+	const cordovaConfigPath = path.join(protoPath, 'config.xml');
+	const content = fs.readFileSync(cordovaConfigPath, 'utf-8');
+	const name = /<name>([\s\S]*)<\/name>/mi.exec(content)[1].trim();
 	return xmlEntities.decode(name);
 }
 
@@ -63,15 +23,15 @@ function matchBuildSettingsValue(value, expectedValue) {
 }
 
 function debug(msg) {
-	console.log('veriff-swift-support.js [INFO] ' + msg);
+	console.log(`veriff-swift-support.js [INFO] ${msg}`);
 }
 
 function nonComments(obj) {
-    var COMMENT_KEY = /_comment$/;
-	var
-		keys = Object.keys(obj),
-		newObj = {},
-		i = 0;
+	const COMMENT_KEY = /_comment$/;
+	const
+		keys = Object.keys(obj);
+	const newObj = {};
+	let i = 0;
 
 	for (i; i < keys.length; i += 1) {
 		if (!COMMENT_KEY.test(keys[i])) {
@@ -82,6 +42,40 @@ function nonComments(obj) {
 	return newObj;
 }
 
-function getRelativeToProjectRootPath(path, projectRoot) {
-	return path.replace(projectRoot, '.');
+function getRelativeToProjectRootPath(pathArg, projectRoot) {
+	return pathArg.replace(projectRoot, '.');
 }
+
+module.exports = (context) => {
+	const { projectRoot } = context.opts;
+	const projectName = getProjectName(projectRoot);
+	const platformPath = path.join(projectRoot, 'platforms', 'ios');
+	const xcodeProjectName = `${projectName}.xcodeproj`;
+	const xcodeProjectConfigPath = path.join(
+		platformPath,
+		xcodeProjectName,
+		'project.pbxproj',
+	);
+	const xcodeProject = xcode.project(xcodeProjectConfigPath);
+
+	xcodeProject.parse((error) => {
+		let buildSettingsChanged = false;
+		const configurations = nonComments(xcodeProject.pbxXCBuildConfigurationSection());
+
+		Object.keys(configurations).forEach((config) => {
+			const { buildSettings } = configurations[config];
+
+			if (!matchBuildSettingsValue(buildSettings.SWIFT_VERSION, SWIFT_VERSION_XCODE)) {
+				buildSettings.SWIFT_VERSION = SWIFT_VERSION_XCODE;
+				buildSettingsChanged = true;
+			}
+		});
+
+		if (buildSettingsChanged) {
+			fs.writeFileSync(xcodeProjectConfigPath, xcodeProject.writeSync(), 'utf-8');
+			debug(`file correctly fixed: ${getRelativeToProjectRootPath(xcodeProjectConfigPath, projectRoot)}`);
+		} else {
+			debug(`file is correct: ${getRelativeToProjectRootPath(xcodeProjectConfigPath, projectRoot)}`);
+		}
+	});
+};
