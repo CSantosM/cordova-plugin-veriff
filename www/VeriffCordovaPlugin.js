@@ -1,7 +1,7 @@
 // eslint-disable-next-line import/no-unresolved
 const exec = require('cordova/exec');
 
-const TOKEN_ERROR = 'Session token is required';
+const URL_ERROR = 'Session URL is required';
 
 const PLUGIN_NAME = 'VeriffCordovaPlugin';
 
@@ -22,7 +22,7 @@ function start(sessionToken) {
 				[sessionToken],
 			);
 		} else {
-			reject(new Error(TOKEN_ERROR));
+			reject(new Error(URL_ERROR));
 		}
 	});
 }
