@@ -1,7 +1,7 @@
 
 import Veriff
 
-@objc(TwilioVideoCordovaPlugin) class VeriffCordovaPlugin: CDVPlugin {
+@objc(VeriffCordovaPlugin) class VeriffCordovaPlugin: CDVPlugin {
     
     var callbackId: String = ""
     
