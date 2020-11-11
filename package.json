@@ -1,6 +1,7 @@
 {
 	"name": "cordova-plugin-veriff",
 	"version": "1.1.0",
+	"main": "dist/veriff.js",
 	"description": "Cordova plugin exposing Veriff SDK",
 	"scripts": {
 		"build": "webpack -p"
