@@ -7,8 +7,9 @@
 Cordova plugin exposing the [Veriff SDK](https://www.veriff.com/) - Smart and scalable identity verification
 
 ## Requeriments
-- Android 5.0 or newer
+- Android 5.1 or newer
 - iOS version 11.0 or newer
+
 ## Installation
 
 Within your Cordova project:
@@ -17,10 +18,9 @@ Within your Cordova project:
 $ cordova plugin add cordova-plugin-veriff
 ```
 
-
 ## Usage
 
-The plugin exposes the VERIFF JavaScript namespace wich cointains a Veriff end-to-end verification service.
+The plugin exposes the VERIFF JavaScript namespace which cointains a Veriff end-to-end verification service.
 
 To use this plugin:
 
@@ -32,20 +32,19 @@ In your ionic app:
 declare var VERIFF;
 ```
 
-2. Create a session with your Veriff API KEY.
+2. Create a [session verification](https://developers.veriff.com/#/sessions) with your Veriff API KEY.
 
 
 2. Start the verification process:
 
-*sessionToken* should be unique for each call. Check /sessions endpoint in th[e Veriff API documentation](https://developers.veriff.com/#sessions) to learn how to generate one.
+We will need the verification sessionUrl to start the Veriff process
 
 ```javascript
-let sessionToken = "your Veriff session token"
-this.platform.ready().then(() => {
-  VERIFF.start(sessionToken).then(code => {
-    // The promise returns the VeriffSDK verification result
-  });
-});
+const session = await this.createVeriffSession();
+VERIFF.start(session.verification.url).then((result: { message: string, status: string }) => {
+  // The promise returns the VeriffSDK verification result
+  console.log("Result: ", result);
+}).catch(err => console.error(err));
 ```
 
 ## Building
