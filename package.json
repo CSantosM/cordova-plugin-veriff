@@ -1,7 +1,6 @@
 {
 	"name": "cordova-plugin-veriff",
-	"version": "1.1.0",
-	"main": "dist/veriff.js",
+	"version": "2.0.0",
 	"description": "Cordova plugin exposing Veriff SDK",
 	"scripts": {
 		"build": "webpack -p"
@@ -45,6 +44,7 @@
 		"ios"
 	],
 	"author": "Carlos Santos Morales",
+	"maintainers": ["Carlos Santos Morales(CSantosM)"],
 	"license": "Apache-2.0",
 	"bugs": {
 		"url": "https://github.com/CSantosM/cordova-plugin-veriff/issues"
