@@ -3,6 +3,7 @@
 package org.apache.cordova.csantosm;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 // Veriff imports
+import com.veriff.VeriffBranding;
+import com.veriff.VeriffConfiguration;
 import com.veriff.VeriffResult;
 import com.veriff.VeriffSdk;
 
@@ -24,6 +27,8 @@ public class VeriffCordovaPlugin extends CordovaPlugin {
 
   private static final int REQUEST_CODE = 800;
   private static CallbackContext callbackContextApp;
+  private static JSONObject veriffConfig = new JSONObject();
+
 
   @Override
   public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
@@ -32,6 +37,9 @@ public class VeriffCordovaPlugin extends CordovaPlugin {
       if (args.isNull(0)) {
         this.callbackContextApp.error("Error: Session token is required");
         return false;
+      }
+      if (!args.isNull(1)) {
+        veriffConfig = new JSONObject(args.getString(1));
       }
       String sessionUrl = args.getString(0);
       this.launchVeriffSDK(sessionUrl);
@@ -44,7 +52,20 @@ public class VeriffCordovaPlugin extends CordovaPlugin {
 
   private void launchVeriffSDK(String sessionUrl) {
     cordova.setActivityResultCallback(this);
-    Intent intent = VeriffSdk.createLaunchIntent(cordova.getActivity(), sessionUrl);
+    VeriffBranding.Builder branding = new VeriffBranding.Builder();
+
+    if(veriffConfig.length() > 0) {
+      try {
+        branding.themeColor(Color.parseColor(veriffConfig.getString("themeColor")));
+      } catch (JSONException e) {
+        e.printStackTrace();
+      }
+    }
+
+    VeriffConfiguration configuration = new VeriffConfiguration.Builder()
+            .branding(branding.build())
+            .build();
+    Intent intent = VeriffSdk.createLaunchIntent(cordova.getActivity(), sessionUrl, configuration);
     cordova.startActivityForResult(this, intent, REQUEST_CODE);
   }
 
