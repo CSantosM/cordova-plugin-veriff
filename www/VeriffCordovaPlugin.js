@@ -7,7 +7,7 @@ const PLUGIN_NAME = 'VeriffCordovaPlugin';
 
 const LAUNCH_VERIFF_SDK_ACTION = 'launchVeriffSDK';
 
-function start(sessionToken) {
+function start(sessionToken, configuration) {
 	return new Promise((resolve, reject) => {
 		if (sessionToken) {
 			exec(
@@ -19,7 +19,7 @@ function start(sessionToken) {
 				},
 				PLUGIN_NAME,
 				LAUNCH_VERIFF_SDK_ACTION,
-				[sessionToken],
+				[sessionToken, configuration],
 			);
 		} else {
 			reject(new Error(URL_ERROR));
