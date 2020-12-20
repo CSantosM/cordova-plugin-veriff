@@ -9,11 +9,18 @@ import Veriff
     func launchVeriffSDK(command: CDVInvokedUrlCommand) {
         callbackId = command.callbackId! as String
         let sessionUrl = command.arguments[0] as! String
+        var configuration = VeriffSdk.Configuration()
+
+        if let veriffConfiguration: Dictionary<String,String> = command.arguments[1] as? Dictionary<String,String> {
+            let branding = VeriffSdk.Branding(themeColor: UIColor.init(hexString: veriffConfiguration["themeColor"]!))
+            configuration = VeriffSdk.Configuration(branding: branding)
+        }
+        
         let veriff = VeriffSdk.shared
         veriff.delegate = self
-        veriff.startAuthentication(sessionUrl: sessionUrl)
+        veriff.startAuthentication(sessionUrl: sessionUrl, configuration: configuration)
     }
-    
+        
     private func returnErrorToCordova(message: String) {
         self.commandDelegate!.send(
             CDVPluginResult(

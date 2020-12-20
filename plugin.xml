@@ -53,6 +53,8 @@
 
         <!-- source-file -->
         <source-file src="src/ios/VeriffCordovaPlugin.swift" />
+        <source-file src="src/ios/Utils.swift" />
+
 
         <podspec>
             <config>
