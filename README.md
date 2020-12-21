@@ -40,8 +40,12 @@ declare var VERIFF;
 We will need the verification sessionUrl to start the Veriff process
 
 ```javascript
-const session = await this.createVeriffSession();
-VERIFF.start(session.verification.url).then((result: { message: string, status: string }) => {
+const sessionURL = session.verification.url;
+const configuration = {
+  themeColor: '#0F3C32'
+};
+
+VERIFF.start(sessionURL, configuration).then((result: { message: string, status: string }) => {
   // The promise returns the VeriffSDK verification result
   console.log("Result: ", result);
 }).catch(err => console.error(err));

@@ -1,5 +1,16 @@
 # Changelog
 
+## Version 2.1.0
+
+* VERIFF.start method allows an optional `configuration` param composed by `themeColor` property which represent the HEX color value of the Veriff theme
+
+```javascript
+const configuration = {
+  themeColor: '#0F3C32'
+};
+```
+
+
 ## Version 2.0.0
 
 * VERIFF.start method requires the Veriff **verification URL** instead of the token
