@@ -71,5 +71,5 @@ See [CHANGELOG.md](CHANGELOG.md)
 
 [Carlos Santos Morales](https://www.linkedin.com/in/csantosm/)
 
-**If you liked the project, consider buy me a coffee :) **
+**If you liked the project, consider buy me a coffee :)**
 <a href="https://www.buymeacoffee.com/csantosm" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-white.png" alt="Buy Me A Coffee" style="height: 51px !important;width: 217px !important;" ></a>
